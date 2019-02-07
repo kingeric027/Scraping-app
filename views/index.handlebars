@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #2f3f61; margin-bottom:5px;">
+  <a class="navbar-brand" href="/" style="color:white;">Home</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/saved" style="color:white;">Saved Articles <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <button type="button" class="btn btn-success" id="scrape">Scrape Articles</button>
+      </li>
+      <li class="nav-item active">
+        <button type="button" class="btn btn-success" id="clear">Clear Articles</button>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+<div class="container">
+    {{#each articles}}
+
+        <div class="card" style="margin-bottom:10px;">
+            <a href={{link}}>
+            <h5 class="card-header">{{title}}</h5>
+            </a>
+            <div class="card-body">
+                <p class="card-text">{{summary}}</p>
+                <button type="button" class="btn btn-primary saveArticle" data-id={{_id}} style="background-color:#2f3f61">Save Article</button>
+            </div>
+        </div>
+    {{/each}}
+</div>
+
+<script>
+
+
+</script>
+
+
