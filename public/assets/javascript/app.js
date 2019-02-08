@@ -29,26 +29,47 @@ $(function() {
       })
   });
 
-  $("#notes").on("click", function(event) {
-      console.log("CLICKED");
-      var id = $(this).attr("data-id");
-      var modalid = "#"+id;
-      console.log(modalid);
-      $(modalid).modal("toggle");
+  //When a notes button is clicked
+  $(".notes").on("click", function(event) {
+      console.log("Notes Clicked!")
+      $(".modal-body").empty();
+      $(".modal-title").empty();
+
+      var thisId = $(this).attr("data-id");
+      console.log(thisId);
+
+      $.ajax({
+          method: "GET",
+          url:"/articles/"+thisId  //make sure this is right
+      })
+      .then(function(data) {
+          console.log(data);
+          $(".saveNote").attr("data-id", data._id);
+          $(".modal-title").html(data.title);
+          if(data.note.length>0) {
+            console.log("There is a note");
+            for(i=0; i<data.note.length;i++){
+                $(".modal-body").append("<div>"+data.note[i].body+"</div>")
+            }
+          }
+      })
+      $(".modal").modal("toggle");
   });
 
-  $("#submitNote").on("click", function(event) {
-      var id = $(this).attr("data-id");
+  $(".saveNote").on("click", function(event) {
+      var thisId = $(this).attr("data-id");
       $.ajax({
           method: "POST",
-          url: "/articles/"+id,
+          url: "/articles/"+thisId,
           data: {
             title: "test",
-            body: $("#noteInput").val()
+            body: $(".noteInput").val()
           }
       }).then(function(data) {
+          $(".modal-body").append("<div>"+$(".noteInput").val()+"</div>");
           console.log(data);
-      })
-  })
+          $(".noteInput").val("");
+      });
+  });
   
 });

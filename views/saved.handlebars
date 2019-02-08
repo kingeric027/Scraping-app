@@ -27,39 +27,34 @@
             <div class="card-body">
                 <p class="card-text">{{summary}}</p>
                 <button type="button" class="btn btn-primary saveArticle" data-id={{_id}} style="background-color:#2f3f61">Delete From Saved</button>
-                <button type="button" class="btn btn-primary" id="notes" data-id={{_id}} style="background-color:#2f3f61">Article Notes</button>
+                <button type="button" class="btn btn-primary notes" data-id={{_id}} style="background-color:#2f3f61">Article Notes</button>
             </div>
         </div>
+    {{/each}}
 
-<div class="modal" tabindex="-1" role="dialog" id={{_id}}>
+<div class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">{{title}}</h5>
+        <h5 class="modal-title"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        {{#each articles.notes}}
-        <div>
-          <p>{{body}}</p>
-        </div>
-        {{/each}}
         
       </div>
       <div class="modal-input">
         <label id="noteLabel">Note:</label>
-        <textarea name="note" id="noteInput" rows="3" cols="25">Add Note</textarea>
+        <textarea name="note" class="noteInput" rows="3" cols="25">Add Note</textarea>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-id={{_id}} id="submitNote">Save</button>
+        <button type="button" class="btn btn-success saveNote">Save</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
 </div>
-    {{/each}}
 
 </div>
 
