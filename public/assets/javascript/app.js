@@ -13,13 +13,13 @@ $(function() {
       console.log("CLICKED");
       if($(this).html() == "Save Article"){
         $(this).html("Saved");
-      } else {
+      } else if($(this).html() == 'Saved'){
+          $(this).html("Save Article");
+      } 
+      else {
         $(this).html("Removed");
       }
-      
-      
       var id = $(this).attr("data-id");
-
       //Update the article so saved is true
       $.ajax({
           method: "POST",
@@ -27,6 +27,14 @@ $(function() {
       }).then(function(data) {
           console.log(data);
       })
+  });
+
+  //clear articles
+  $("#clear").on("click", function(event) {
+      $.ajax({
+          method: "DELETE",
+          url: "/clear"
+    })
   });
 
   //When a notes button is clicked

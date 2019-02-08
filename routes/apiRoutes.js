@@ -104,6 +104,17 @@ app.post("/articles/:id", function(req, res) {
       });
   });
 
+  app.delete("/clear", function(req, res) {
+    db.Article.remove({})
+    .populate("note")
+    .then(function(dbArticle) {
+      res.json(dbArticle);
+    })
+    .catch(function(err) {
+      res.json(err);
+    });
+  });
+
   //Route for saving an article (Changing saved to true)
   //app.post("/articles/saved/:id", function(req, res) {
   //    db.Article.findOneAndUpdate({_id: req.params.id }, {saved:true})
@@ -131,16 +142,6 @@ app.post("/articles/saved/:id", function(req, res) {
       });
   });
   
-  //Route for testing if notes are being added
-  app.get("/notes", function(req, res) {
-    db.Note.find({})
-    .then(function(dbNote){
-      res.json(dbNote)
-    })
-    .catch(function(err) {
-      res.json(err);
-    })
-  })
   
   
 
